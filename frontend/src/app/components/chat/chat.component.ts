@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
           <app-message
             *ngFor="let message of messages; trackBy: trackByMessageId"
             [message]="message"
-            [isCurrentUser]="message.userId === currentUserId"
+            [isCurrentUser]="message.UserId === currentUserId"
           ></app-message>
         </div>
       </main>
@@ -133,17 +133,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   trackByMessageId(index: number, message: Message): string {
-    return message.id;
+    return message.Id;
   }
 
   onSendMessage(text: string) {
     if (!this.currentUserId) return;
-    
-    this.chatService.sendMessage({
-      text,
-      userId: this.currentUserId,
-      username: 'User'
-    });
+    this.chatService.sendMessage(text);
   }
 
   async logout() {

@@ -15,10 +15,10 @@ import { formatMessageDate } from '../../utils/date.util';
     >
       <div class="message-content">
         <span class="username" [class.sent-username]="isCurrentUser">
-          {{isCurrentUser ? 'You' : message.username}}
+          {{isCurrentUser ? 'You' : message.UserName}}
         </span>
-        <p class="text">{{message.text}}</p>
-        <span class="timestamp">{{formatDate(message.timestamp)}}</span>
+        <p class="text">{{message.Text}}</p>
+        <span class="timestamp">{{formatDate(message.Timestamp)}}</span>
       </div>
     </div>
   `,

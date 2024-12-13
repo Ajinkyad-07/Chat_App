@@ -20,6 +20,7 @@ export class AuthService {
   async login(email: string, password: string) {
     try {
       const result = await signInWithEmailAndPassword(this.auth, email, password);
+      localStorage.setItem("userId", result.user.uid);
       return result;
     } catch (error) {
       console.error('Login error:', error);
@@ -40,6 +41,7 @@ export class AuthService {
   async logout() {
     try {
       await signOut(this.auth);
+      localStorage.removeItem("userId");
     } catch (error) {
       console.error('Logout error:', error);
       throw error;
