@@ -4,10 +4,12 @@ import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
 import { AuthGuard } from '../guards/auth.guard';
 import { UserListComponent } from './user-list/user-list.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes  = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UserListComponent, canActivate: [AuthGuard] }
 ];

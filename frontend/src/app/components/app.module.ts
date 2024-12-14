@@ -12,11 +12,13 @@ import { MessageComponent } from './message/message.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatInputComponent } from './chat-input/chat-input.component';
 import { SharedModule } from '../shared/shared.module';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     MessageComponent,
     ChatComponent,
     UserListComponent,

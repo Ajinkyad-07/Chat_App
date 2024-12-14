@@ -26,7 +26,6 @@ export class LoginComponent {
   async onSubmit() {
     if (this.loginForm.valid) {
       try {
-        debugger
         const { email, password } = this.loginForm.value;
         await this.authService.login(email, password);
         this.router.navigate(['/users']);
@@ -34,5 +33,10 @@ export class LoginComponent {
         console.error('Login error:', error);
       }
     }
+  }
+
+  redirectToRegister()
+  {
+    this.router.navigate(['/register']);
   }
 }

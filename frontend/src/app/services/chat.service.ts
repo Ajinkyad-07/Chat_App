@@ -12,13 +12,11 @@ export class ChatService {
   messages$ = this.messagesSubject.asObservable();
 
   constructor() {
-    debugger
     this.userId = localStorage.getItem("userId");
     this.connectToWebSocket();
   }
 
   private connectToWebSocket(): void {
-    debugger
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const websocketUrl = `${protocol}//${window.location.hostname}:5110?userId=${this.userId}`;
 

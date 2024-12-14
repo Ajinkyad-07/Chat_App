@@ -22,7 +22,6 @@ export class AuthService {
       };
       return this.api.loginUser(request).subscribe(
         (data: User) => {
-          debugger
           console.log("Login Details...", data);
           localStorage.setItem("userId", data.Uid);
           this.userSubject.next(data);
@@ -40,13 +39,13 @@ export class AuthService {
     }
   }
 
-  async register(email: string, password: string, displayName: string) {
+  async register(email: string, password: string, userName: string) {
     try {
       const request: User = {
         Uid: "",
         Email: email,
         Password: password,
-        DisplayName: displayName
+        DisplayName: userName
       };
       return this.api.registerUser(request).subscribe(
         (data: User) => {

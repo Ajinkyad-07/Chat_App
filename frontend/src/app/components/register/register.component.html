@@ -1,7 +1,15 @@
-<div class="login-container">
-    <div class="login-box">
-      <h2>Login</h2>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div class="register-container">
+    <div class="register-box">
+      <h2>Register</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <input
+              type="userName"
+              formControlName="userName"
+              placeholder="UserName"
+              class="form-control"
+            />
+          </div>
         <div class="form-group">
           <input
             type="email"
@@ -18,9 +26,8 @@
             class="form-control"
           />
         </div>
-        <button type="submit" [disabled]="loginForm.invalid">Login</button>
+        <button type="submit" [disabled]="registerForm.invalid">Register</button>
       </form>
       <br/>
-      <button (click)="redirectToRegister()">Register</button>
     </div>
   </div>
