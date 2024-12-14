@@ -1,9 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116 d17.12
+VisualStudioVersion = 17.12.35506.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketServer", "WebSocketServer.csproj", "{059030A6-E7DF-4C7F-BB7F-268ACD7AA365}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketServer.Application", "..\WebSocketServer.Application\WebSocketServer.Application.csproj", "{CD498125-BD6B-45D3-86B0-821CBD10F89A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketServer.Domain", "..\WebSocketServer.Domain\WebSocketServer.Domain.csproj", "{9E282E19-7B5F-41F7-B318-703974355003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketServer.Infrastructure", "..\WebSocketServer.Infrastructure\WebSocketServer.Infrastructure.csproj", "{36BADAC8-EEE1-4FBB-B4D7-36D38AEA34DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketServer.UnitTest", "..\WebSocketServer.UnitTest\WebSocketServer.UnitTest.csproj", "{16C54AB5-895E-4A36-956D-FEB1C0CEDD93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{059030A6-E7DF-4C7F-BB7F-268ACD7AA365}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{059030A6-E7DF-4C7F-BB7F-268ACD7AA365}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{059030A6-E7DF-4C7F-BB7F-268ACD7AA365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD498125-BD6B-45D3-86B0-821CBD10F89A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD498125-BD6B-45D3-86B0-821CBD10F89A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD498125-BD6B-45D3-86B0-821CBD10F89A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD498125-BD6B-45D3-86B0-821CBD10F89A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E282E19-7B5F-41F7-B318-703974355003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E282E19-7B5F-41F7-B318-703974355003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E282E19-7B5F-41F7-B318-703974355003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E282E19-7B5F-41F7-B318-703974355003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36BADAC8-EEE1-4FBB-B4D7-36D38AEA34DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36BADAC8-EEE1-4FBB-B4D7-36D38AEA34DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36BADAC8-EEE1-4FBB-B4D7-36D38AEA34DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36BADAC8-EEE1-4FBB-B4D7-36D38AEA34DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16C54AB5-895E-4A36-956D-FEB1C0CEDD93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16C54AB5-895E-4A36-956D-FEB1C0CEDD93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16C54AB5-895E-4A36-956D-FEB1C0CEDD93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16C54AB5-895E-4A36-956D-FEB1C0CEDD93}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

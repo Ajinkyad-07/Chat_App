@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/WebSocketServer.Infrastructure/obj
+/WebSocketServer.Infrastructure/bin
+/WebSocketServer.UnitTest/obj
+/WebSocketServer.UnitTest/bin
+/WebSocketServer.Domain/obj
+/WebSocketServer.Domain/bin
+/WebSocketServer.Application/obj
+/WebSocketServer.Application/bin
+/WebSocketServer/obj
+/WebSocketServer/bin
+/WebSocketServer/.vs
+WebSocketServer/Keys
