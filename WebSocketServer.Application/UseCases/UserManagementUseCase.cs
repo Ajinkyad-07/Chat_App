@@ -1,5 +1,7 @@
-﻿using WebSocketServer.Domain.Entities;
+﻿using WebSocketServer.Application.ViewModels;
+using WebSocketServer.Domain.Entities;
 using WebSocketServer.Domain.Interfaces;
+using WebSocketServer.Domain.RequestModels;
 
 namespace WebSocketServer.Application.UseCases
 {
@@ -12,9 +14,9 @@ namespace WebSocketServer.Application.UseCases
             _firebaseUserService = firebaseUserService;
         }
 
-        public Task<string> RegisterUserAsync(User user) => _firebaseUserService.RegisterUserAsync(user);
+        public Task<User> RegisterUserAsync(User user) => _firebaseUserService.RegisterUserAsync(user);
 
-        public Task<string> LoginUserAsync(string email, string password) => _firebaseUserService.LoginUserAsync(email, password);
+        public Task<User> LoginUserAsync(LoginRequest request) => _firebaseUserService.LoginUserAsync(request);
 
         public Task<IEnumerable<User>> GetAllUsersAsync() => _firebaseUserService.GetAllUsersAsync();
 

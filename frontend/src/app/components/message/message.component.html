@@ -1,0 +1,9 @@
+<div class="message" [class.sent]="isCurrentUser" [class.received]="!isCurrentUser">
+    <div class="message-content">
+        <span class="username" [class.sent-username]="isCurrentUser">
+            {{isCurrentUser ? 'You' : message.UserName}}
+        </span>
+        <p class="text">{{message.Text}}</p>
+        <span class="timestamp">{{formatDate(message.Timestamp)}}</span>
+    </div>
+</div>

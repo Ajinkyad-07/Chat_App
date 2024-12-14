@@ -12,14 +12,16 @@ export class ChatService {
   messages$ = this.messagesSubject.asObservable();
 
   constructor() {
+    debugger
     this.userId = localStorage.getItem("userId");
     this.connectToWebSocket();
   }
 
   private connectToWebSocket(): void {
+    debugger
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const websocketUrl = `${protocol}//${window.location.hostname}:5110?userId=${this.userId}`; // Adjust to match your server port
-    
+    const websocketUrl = `${protocol}//${window.location.hostname}:5110?userId=${this.userId}`;
+
     // Initialize the WebSocket
     this.socket = new WebSocket(websocketUrl);
 
@@ -46,17 +48,20 @@ export class ChatService {
     };
   }
 
-  sendMessage(message: string): void {
+  sendMessage(userId:string, text: string): void {
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-      let id = "bVVXES6y7AY9RljPKsIFEFWAzVM2";
-      let msg : Message = {
-        Text : message,
-        UserName: "user",
+      let message : Message = {
+        Text : text,
+        UserName: userId, // add username
         Timestamp: new Date(),
-        UserId : id,
+        UserId : userId,
         Id : this.generateRandomId()
       }
-      this.socket.send(JSON.stringify(msg));
+      this.socket.send(JSON.stringify(message));
+      const currentMessages = this.messagesSubject.value;
+      this.messagesSubject.next([...currentMessages, {
+        ...message
+      }]);
     } else {
       console.error('WebSocket is not connected');
     }

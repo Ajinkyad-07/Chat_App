@@ -3,6 +3,8 @@ using WebSocketServer.Domain.Entities;
 using WebSocketServer.Domain.Interfaces;
 using System.Net.Http.Json;
 using Microsoft.Extensions.Configuration;
+using WebSocketServer.Application.ViewModels;
+using WebSocketServer.Domain.RequestModels;
 
 namespace WebSocketServer.Infrastructure.Services
 {
@@ -19,7 +21,7 @@ namespace WebSocketServer.Infrastructure.Services
             _httpClient = new HttpClient();
         }
 
-        public async Task<string> RegisterUserAsync(User user)
+        public async Task<User> RegisterUserAsync(User user)
         {
             // Create user with Firebase Admin SDK
             var createdUser = await _adminAuth.CreateUserAsync(new UserRecordArgs
@@ -28,25 +30,25 @@ namespace WebSocketServer.Infrastructure.Services
                 Password = user.Password,
                 DisplayName = user.DisplayName,
             });
-
-            return createdUser.Uid;
+            user.Uid = createdUser.Uid;
+            return user;
         }
 
-        public async Task<string> LoginUserAsync(string email, string password)
+        public async Task<User> LoginUserAsync(LoginRequest request)
         {
             try
             {
-                // Login user with Firebase REST API
-                var payload = new
-                {
-                    email = email,
-                    password = password,
-                    returnSecureToken = true
-                };
+                //// Login user with Firebase REST API
+                //var payload = new
+                //{
+                //    email = email,
+                //    password = password,
+                //    returnSecureToken = true
+                //};
 
                 var response = await _httpClient.PostAsJsonAsync(
                     $"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={_firebaseApiKey}",
-                    payload);
+                    request);
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -55,7 +57,13 @@ namespace WebSocketServer.Infrastructure.Services
                 }
 
                 var result = await response.Content.ReadFromJsonAsync<FirebaseLoginResponse>();
-                return result.IdToken; // Return Firebase ID token
+                var user = await _adminAuth.GetUserAsync(result.LocalId);
+                return new User
+                {
+                    Uid = user.Uid,
+                    Email = user.Email,
+                    DisplayName = user.DisplayName,
+                };
             }
             catch (Exception ex)
             {
@@ -67,7 +75,6 @@ namespace WebSocketServer.Infrastructure.Services
         {
             var users = new List<User>();
             var pagedEnumerable = _adminAuth.ListUsersAsync(null);
-
             await foreach (var user in pagedEnumerable)
             {
                 users.Add(new User
@@ -115,12 +122,5 @@ namespace WebSocketServer.Infrastructure.Services
                 throw new Exception("Token verification failed: " + ex.Message);
             }
         }
-    }
-
-    public class FirebaseLoginResponse
-    {
-        public string IdToken { get; set; }
-        public string LocalId { get; set; }
-        public string Email { get; set; }
     }
 }

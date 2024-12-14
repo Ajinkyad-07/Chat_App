@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebSocketServer.Application.UseCases;
 using WebSocketServer.Domain.Entities;
+using WebSocketServer.Domain.RequestModels;
 
 namespace WebSocketServer.Controllers
 {
@@ -16,31 +17,31 @@ namespace WebSocketServer.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] User user)
+        public async Task<User> Register([FromBody] User user)
         {
-            var uid = await _userManagementUseCase.RegisterUserAsync(user);
-            return Ok(new { UserId = uid });
+            var registerdUser = await _userManagementUseCase.RegisterUserAsync(user);
+            return registerdUser;
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string email, string password)
+        public async Task<User> Login([FromBody] LoginRequest request)
         {
-            var uid = await _userManagementUseCase.LoginUserAsync(email, password);
-            return Ok(new { UserId = uid });
+            var response = await _userManagementUseCase.LoginUserAsync(request);
+            return response;
         }
 
         [HttpGet("all")]
-        public async Task<IActionResult> GetAllUsers()
+        public async Task<List<User>> GetAllUsers()
         {
             var users = await _userManagementUseCase.GetAllUsersAsync();
-            return Ok(users);
+            return users.ToList();
         }
 
         [HttpPut("edit/{uid}")]
-        public async Task<IActionResult> Edit(string uid, [FromBody] User user)
+        public async Task<User> Edit(string uid, [FromBody] User user)
         {
             var updatedUser = await _userManagementUseCase.EditUserAsync(uid, user);
-            return Ok(updatedUser);
+            return updatedUser;
         }
 
         [HttpDelete("delete/{uid}")]
@@ -50,5 +51,4 @@ namespace WebSocketServer.Controllers
             return Ok(new { Message = "User deleted successfully" });
         }
     }
-
 }

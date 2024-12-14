@@ -1,0 +1,13 @@
+<app-header>
+    <main class="messages-container" #messagesContainer>
+      <div class="messages-list">
+        <app-message
+          *ngFor="let message of messages; trackBy: trackByMessageId"
+          [message]="message"
+          [isCurrentUser]="message.UserId === currentUserId"
+        ></app-message>
+      </div>
+    </main>
+    
+    <app-chat-input (send)="onSendMessage($event)"></app-chat-input>
+</app-header>

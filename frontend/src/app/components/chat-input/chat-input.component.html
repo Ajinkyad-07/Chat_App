@@ -1,0 +1,12 @@
+<div class="input-container">
+    <input
+      type="text"
+      [(ngModel)]="message"
+      (keyup.enter)="sendMessage()"
+      placeholder="Type a message..."
+      class="message-input"
+    />
+    <button (click)="sendMessage()" [disabled]="!message.trim()" class="send-btn">
+      Send
+    </button>
+  </div>

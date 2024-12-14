@@ -9,7 +9,6 @@ namespace WebSocketServer.Infrastructure.Extensions
     {
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            services.AddSingleton<IWebSocketManager, WebSocketManager>();
             services.AddScoped<IFirebaseUserService, FirebaseUserService>();
             services.AddScoped<UserManagementUseCase>();
             return services;

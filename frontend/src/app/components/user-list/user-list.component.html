@@ -1,0 +1,13 @@
+<app-header>
+    <div class="user-list">
+        <h3>Users Online</h3>
+        <ul>
+            <li *ngFor="let user of users; trackBy: trackByUid" (click)="onUserClick(user)">
+                <div class="user-item">
+                    <span class="user-name">{{ user.DisplayName }}</span>
+                    <span class="user-email">{{ user.Email }}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</app-header>
