@@ -143,20 +143,12 @@ async Task HandleWebSocketConnection(string userId, WebSocket webSocket, Concurr
             var incomingMessage = JsonSerializer.Deserialize<IncomingMessage>(message);
             if (incomingMessage != null)
             {
-                string targetUserId = incomingMessage.UserId;
+                string targetUserId = incomingMessage.ReceiverId;
 
                 if (connections.TryGetValue(targetUserId, out WebSocket targetWebSocket) && targetWebSocket.State == WebSocketState.Open)
                 {
-                    // Create the response object
-                    var responseObj = new IncomingMessage
-                    {
-                        UserName = incomingMessage.UserName,
-                        UserId = userId,
-                        Text = incomingMessage.Text,
-                        Timestamp = incomingMessage.Timestamp,
-                        Id = incomingMessage.Id
-                    };
 
+                    incomingMessage.Id = GenerateRandomString(24);
                     // Serialize and send the response
                     string jsonResponse = JsonSerializer.Serialize(incomingMessage);
                     byte[] response = Encoding.UTF8.GetBytes(jsonResponse);
@@ -177,11 +169,27 @@ async Task HandleWebSocketConnection(string userId, WebSocket webSocket, Concurr
     }
 }
 
+static string GenerateRandomString(int length)
+{
+    const string characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var result = new StringBuilder(length);
+    var random = new Random();
+
+    for (int i = 0; i < length; i++)
+    {
+        result.Append(characters[random.Next(characters.Length)]);
+    }
+
+    return result.ToString();
+}
+
 class IncomingMessage
 {
     public string Text { get; set; }
-    public string UserId { get; set; } // Target user's ID
-    public string UserName { get; set; }
+    public string ReceiverId { get; set; } // Target user's ID
+    public string ReceiverName { get; set; }
+    public string SenderId { get; set; }
+    public string SenderName { get; set; }
     public DateTime Timestamp { get; set; }
     public string Id { get; set; }
 }
