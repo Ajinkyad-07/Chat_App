@@ -46,15 +46,8 @@ export class ChatService {
     };
   }
 
-  sendMessage(userId:string, text: string): void {
+  sendMessage(message: Message): void {
     if (this.socket && this.socket.readyState === WebSocket.OPEN) {
-      let message : Message = {
-        Text : text,
-        UserName: userId, // add username
-        Timestamp: new Date(),
-        UserId : userId,
-        Id : this.generateRandomId()
-      }
       this.socket.send(JSON.stringify(message));
       const currentMessages = this.messagesSubject.value;
       this.messagesSubject.next([...currentMessages, {

@@ -4,7 +4,7 @@
         <app-message
           *ngFor="let message of messages; trackBy: trackByMessageId"
           [message]="message"
-          [isCurrentUser]="message.UserId === currentUserId"
+          [isCurrentUser]="message.SenderId === user.Uid"
         ></app-message>
       </div>
     </main>

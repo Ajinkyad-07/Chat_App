@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Message } from '../../models/message.model';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from '../../models/user.model';
 
 @Component({
   selector: 'app-chat',
@@ -14,8 +15,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   
   messages: Message[] = [];
-  currentUserId = '';
+  user!: User;
   receiverUserId = '';
+  receiverUserName = '';
   private subscriptions: Subscription[] = [];
   private shouldScrollToBottom = true;
 
@@ -33,9 +35,17 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.shouldScrollToBottom = true;
       })
     );
+    this.authService.user$.subscribe(user => {
+      if (user) {
+        this.user = user;
+      } else {
+        this.router.navigate(['/login']);
+      }
+    })
     // Fetch the query parameter (uId) from the route
     this.activatedRoute.queryParams.subscribe(params => {
       this.receiverUserId = params['uId'];
+      this.receiverUserName = params['userName'];
     });
   }
 
@@ -60,8 +70,17 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   onSendMessage(text: string) {
-    if (!this.currentUserId && !this.receiverUserId) return;
-    this.chatService.sendMessage(this.receiverUserId, text);
+    if (!this.user.Uid && !this.receiverUserId) return;
+      let message : Message = {
+        Id: "",
+        Text: text,
+        SenderName: this.user.DisplayName,
+        SenderId: this.user.Uid,
+        Timestamp: new Date(),
+        ReceiverId: this.receiverUserId,
+        ReceiverName: this.receiverUserName
+      }
+    this.chatService.sendMessage(message);
   }
 
 

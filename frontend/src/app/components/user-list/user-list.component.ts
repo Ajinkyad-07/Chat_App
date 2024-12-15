@@ -32,7 +32,7 @@ export class UserListComponent {
   // Method to handle the click event
   onUserClick(user: User): void {
     console.log('User clicked:', user);
-    this.router.navigate(['/chat'], { queryParams: { uId: user.Uid } });
+    this.router.navigate(['/chat'], { queryParams: { uId: user.Uid, userName: user.DisplayName } });
   }
 
   trackByUid(index: number, user: User): string {
