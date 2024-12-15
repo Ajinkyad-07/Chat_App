@@ -182,7 +182,7 @@ static string GenerateRandomString(int length)
 
     return result.ToString();
 }
-
+ 
 class IncomingMessage
 {
     public string Text { get; set; }
